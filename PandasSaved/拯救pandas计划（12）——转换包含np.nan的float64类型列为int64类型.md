@@ -123,7 +123,7 @@ Name: A, dtype: object
 
 可能会想，使用pd.NA可以转化成功，那么使用np.nan呢，具体原因在前文已经说明，不再赘述，可以自行测试。
 
-（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343，公众号A11Dot派)
+（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派)
 
 - astype('Int64')
 
