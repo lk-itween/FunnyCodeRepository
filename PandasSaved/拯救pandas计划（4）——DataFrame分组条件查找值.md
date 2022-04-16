@@ -1,4 +1,4 @@
-@[ToC](拯救pandas计划（4）——DataFrame分组条件查找值)
+# 拯救pandas计划（4）——DataFrame分组条件查找值
 
 最近发现周围的很多小伙伴们都不太乐意使用pandas，转而投向其他的数据操作库，身为一个数据工作者，基本上是张口pandas，闭口pandas了，故而写下此系列以让更多的小伙伴们爱上pandas。  
 
@@ -64,7 +64,7 @@ df.drop_duplicates('用户', inplace=True)
 df.explode('其他标签')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_6.png)
+![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_6.png)  
 大功告成！
 
 ### 方法二：
