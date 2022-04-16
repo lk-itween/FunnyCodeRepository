@@ -1,4 +1,4 @@
-@[ToC](拯救pandas计划（8）——当列聚合数与自身进行再次计算)
+# 拯救pandas计划（8）——当列聚合数与自身进行再次计算
 
 最近发现周围的很多小伙伴们都不太乐意使用pandas，转而投向其他的数据操作库，身为一个数据工作者，基本上是张口pandas，闭口pandas了，故而写下此系列以让更多的小伙伴们爱上pandas。
 
@@ -70,7 +70,7 @@ def calculate_func(x, args):
 
 函数中使用了聚合函数`mean`作为聚合结果，可以聚合的列名作为`mean`后的`index`，通过`args`传入的计算方式，提取`calculate_map`中对应方法，之后再查找`args`中各序号对应的`columns`（在`mean`结果中为`index`）,结果为传入的各个列名的`pd.Series`，再通过`pd.concat(axis=1)`，横向结合各个结果，返回`pd.DataFrame`对象。
 
-（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343，公众号A11Dot派)
+（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派)
 
 ## / 总结
 
