@@ -1,4 +1,4 @@
-@[ToC](拯救pandas计划（3）——多级索引取值)
+# 拯救pandas计划（3）——多级索引取值
 
 最近发现周围的很多小伙伴们都不太乐意使用pandas，转而投向其他的数据操作库，身为一个数据工作者，基本上是张口pandas，闭口pandas了，故而写下此系列以让更多的小伙伴们爱上pandas。  
 
@@ -33,7 +33,7 @@ datac.reset_index(inplace=True)
 datac[(datac['School'] == 'S_2') & (datac['Class'] == 'C_3')]
 ```
 
-![pic2](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save15.png)
+![pic2](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save15.png)  
 可以看到通过该类方法可以成功取到对应值
 
 当然也可以采用`.query`方法进行条件筛选
@@ -48,7 +48,7 @@ datac.query("School == 'S_1' and Class == 'C_3'")
 ### 方法二：
 
 既然为多级索引，pandas也会有对应的取值方式，既可以用链式调用的方式，也可以通过元组进行提取，首先看看多级索引的输出值：  
-![pic4](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save17.png)
+![pic4](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save17.png)  
 是一个MultiIndex类型数据，其元素都是元组，即也能通过元组的方式进行索引调取
 
 这两种都一个共同的特点，从左到右，要先外层再内层，否则会报`KeyError`错误
