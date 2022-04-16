@@ -1,4 +1,4 @@
-@[ToC](拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据)
+# 拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据
 
 最近发现周围的很多小伙伴们都不太乐意使用pandas，转而投向其他的数据操作库，身为一个数据工作者，基本上是张口pandas，闭口pandas了，故而写下此系列以让更多的小伙伴们爱上pandas。
 
@@ -48,7 +48,7 @@ data['price'] = [float(re.sub(r'[$,]', '', i)) for i in data['price']]
 
 结果同上，不再贴图展示。
 
-（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343，公众号A11Dot派)
+（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派)
 
 ### 方法二
 
