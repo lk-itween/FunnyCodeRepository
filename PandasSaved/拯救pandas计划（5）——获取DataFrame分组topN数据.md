@@ -28,7 +28,7 @@
 
 ### 方法一
 
-正如需求拆解里提到过的，使用groupby来完成这部分任务，在取得topN之前是需要对整个数据集进行排序的，这可以先尝试下在groupby之前排序，还是之后排序是否会对整个任务执行时间有影响。
+正如需求拆解里提到过的，使用groupby来完成这部分任务，在取得topN之前是需要对整个数据集进行排序的，这可以先尝试下在groupby之前排序，还是之后排序是否会对整个任务执行时间有影响。  
 **先排序，后分组**  
 
 ```python
@@ -36,9 +36,9 @@ df.sort_values(['name', 'date_col'], inplace=True)
 df.groupby(['name']).head(1)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_3.png)
+![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_3.png)  
 
-**先分组，后排序**
+**先分组，后排序**  
 由于groupby后面不能直接跟sort_values，所以需要调用`apply`来对每个分组进行排序。
 ![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_4.png)
 
