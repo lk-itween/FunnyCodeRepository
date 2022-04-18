@@ -35,4 +35,6 @@
 
 [拯救pandas计划（12）——转换包含np.nan的float64类型列为int64类型](./拯救pandas计划（12）——转换包含np.nan的float64类型列为int64类型.md)
 
+[拯救pandas计划（13）——提取Series字符串中的数字并计算](./拯救pandas计划（13）——提取Series字符串中的数字并计算.md)
+
 
