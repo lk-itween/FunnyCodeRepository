@@ -32,7 +32,7 @@ df
 
 看标题中说到提取字符串中的数字，可以使用对列进行遍历，一个个进行判断，把数字拿出来，而且在上面说了统一格式的数据，怎么给的数据看起来还不是统一的，是不是在唬人呢。  
 
-单个数据来看有点不好判断，在这也不提供这种想法的代码，转念一想，整体看来，正则表达式还挺适合这种格式的字符串数据提取。之前在[拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据](https://mp.weixin.qq.com/s/7wNfrwuXFoYJrTtJ3WVslQ)中也稍有提到正则表达式在pandas里的使用，这次借助本文的例子看下正则表达式如何提取到所需要的数字并进行后续计算。  
+单个数据来看有点不好判断，在这也不提供这种想法的代码，转念一想，整体看来，正则表达式还挺适合这种格式的字符串数据提取。之前在[拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据](https://blog.csdn.net/weixin_46281427/article/details/122900919)中也稍有提到正则表达式在pandas里的使用，这次借助本文的例子看下正则表达式如何提取到所需要的数字并进行后续计算。  
 
 ## / 需求处理
 
@@ -78,7 +78,7 @@ df['平均年数'] = df['年区间'].apply(year_average)
 
 ![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_2.png)
 
-通过`apply`调用`year_average`函数，进行正则查找提取并完成后续计算，逻辑上也比较清晰易懂，之前在[拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据](https://mp.weixin.qq.com/s/7wNfrwuXFoYJrTtJ3WVslQ)中有提到过pd.Series类如果为object类型或者string类型，是有个`.str`方法，可以针对字符串做一些特性操作，在这其中也有提取函数`.str.extract`，同样可以使用正则表达式。    
+通过`apply`调用`year_average`函数，进行正则查找提取并完成后续计算，逻辑上也比较清晰易懂，之前在[拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据](https://blog.csdn.net/weixin_46281427/article/details/122900919)中有提到过pd.Series类如果为object类型或者string类型，是有个`.str`方法，可以针对字符串做一些特性操作，在这其中也有提取函数`.str.extract`，同样可以使用正则表达式。    
 
    ② .str.extract  
 
