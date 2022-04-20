@@ -2,6 +2,7 @@
 使用ffmpeg录制屏幕，并结合Pyaudio同步录制的音频合成带有声音的视频文件
 """
 from pathlib import Path
+from time import sleep
 import sys
 import ffmpeg
 
@@ -52,6 +53,7 @@ class Screenshot:
                 filename=output_path, vcodec='copy', acodec='aac', strict='experimental', pix_fmt='yuv420p'
             ).overwrite_output()
         )
+        sleep(1)
         self.ffmpeg_async()
 
     def ffmpeg_async(self):
