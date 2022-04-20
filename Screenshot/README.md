@@ -4,6 +4,10 @@
 > windows 10  
 > python 3.7
 
+- Screeshot_Gui.exe
+[下载地址](https://github.com/lk-itween/FunnyCodeRepository/releases/download/Screenshot_Gui/Screenshot_Gui.exe)
+
+
 - Screenshot_Gui.py  
 pyqt5制作的屏幕录制窗口，窗口程序入口
 
