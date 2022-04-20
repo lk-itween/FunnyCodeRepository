@@ -21,4 +21,4 @@ pyaudio读取可录制音频设备，设定需要使用的设备进行录制音�
 保存程序运行过程中需要使用到的程序或图片
 
 *ps: 如果PyAudio包安装不能在线安装，python3.7环境请下载PyAudio-0.2.11-cp37-cp37m-win_amd64.whl至本地，在该路径下打开cmd窗口，执行pip install 该whl文件*
-*其他python环境可在https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio下自行安装对应版本的whl文件*
+*其他python环境可在https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio 下自行安装对应版本的whl文件*
