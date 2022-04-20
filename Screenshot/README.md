@@ -4,19 +4,19 @@
 > windows 10  
 > python 3.7
 
-- Screenshot_Gui.py
-pyqt5制作的屏幕录制窗口
+- Screenshot_Gui.py  
+pyqt5制作的屏幕录制窗口，窗口程序入口
 
-- Screenshot_record.py
+- Screenshot_record.py  
 使用ffmpeg工具，利用python调用ffmpeg命令行来录制屏幕
 
-- Audio_record.py
+- Audio_record.py  
 pyaudio读取可录制音频设备，设定需要使用的设备进行录制音频
 
-- Screenshot_record_with_cv2.py
+- Screenshot_record_with_cv2.py  
 使用opencv-python录制视频并保存
 
-- Screenshot_test.py
+- Screenshot_test.py  
 无窗口化测试联动屏幕录制及音频录制，保持音视频同时录制和同时停止录制
 
 - resource
