@@ -1,7 +1,7 @@
 # 使用python动手做一个屏幕录制工具  
 
 *更新日期：2022-04-20*  
-> windows 10
+> windows 10  
 > python 3.7
 
 - Screenshot_Gui.py
