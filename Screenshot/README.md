@@ -4,8 +4,8 @@
 > windows 10  
 > python 3.7
 
-- Screeshot_Gui.exe [84.0M] [下载地址](https://github.com/lk-itween/FunnyCodeRepository/releases/download/Screenshot_Gui/Screenshot_Gui.exe)  
-将ffmpeg一并打包在exe文件中，且使用pyinstaller打包，生成文件较大  
+- Screeshot_Gui.exe [58.5M] [下载地址](https://github.com/lk-itween/FunnyCodeRepository/releases/download/Screenshot_Gui/Screenshot_Gui.exe)  
+先将ffmpeg.exe压缩成7z格式，再一并打包进入exe文件中，且使用pyinstaller打包，生成文件较大  
 
 - Screenshot_Gui.py  
 pyqt5制作的屏幕录制窗口，窗口程序入口
