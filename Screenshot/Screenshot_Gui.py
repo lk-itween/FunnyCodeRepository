@@ -9,16 +9,28 @@
 
 
 import sys
+import shutil
 from datetime import datetime
 from pathlib import Path
 from PyQt5.QtWidgets import (QMainWindow, QApplication, QDesktopWidget, QWidget, QFrame,
                              QLabel, QPushButton, QComboBox, QCheckBox, QSpinBox, QDialog, QFileDialog, QMessageBox)
 from PyQt5.QtGui import QIcon, QFont, QColor, QImage, QPixmap, QPen, QPainter
 from PyQt5.QtCore import QRect, Qt, QPoint, QMetaObject, QThread
+from py7zr import pack_7zarchive, unpack_7zarchive
 from PIL import ImageGrab
 from Audio_record import AudioRecord
 from Screenshot_record import Screenshot, file_path
 
+
+def unpack_7zip_to_exe(filename):
+    file_basename = Path(file_path(f'{filename}.exe'))
+    if file_basename.exists():
+        return True
+    elif file_basename.with_suffix('.7z').exists():
+        shutil.unpack_archive(file_basename.with_suffix('.7z'), file_basename.parent)
+        return unpack_7zip_to_exe(file_basename.stem)
+    else:
+        return False
 
 class Thread_screenshot(QThread):
 
@@ -72,7 +84,7 @@ class Ui_MainWindow(QMainWindow):
         self._dir = '.'
         self.fname = ''
         self.offset_x, self.offset_y = 0, 0
-        self.screen_x, self.screen_y = ImageGrab.grab().size
+        self.screen_x, self.screen_y = ImageGrab.grab().size        
         self.audio = AudioRecord()
         self.audio.get_in_out_devices()
         self.device_name = None
@@ -80,6 +92,9 @@ class Ui_MainWindow(QMainWindow):
         self.hotkey_start = False
         self.screenshot = Thread_screenshot()
         self.setupUi()
+        ffmpeg_exists = unpack_7zip_to_exe('ffmpeg')
+        if not ffmpeg_exists:
+            QMessageBox.warning(self, '请下载ffmpeg！', '请将ffmpeg.exe放在resource目录下再录制！')
         self.show()
 
     def setupUi(self):
@@ -328,6 +343,9 @@ class MousePaint(QDialog):
 
 def main():
     """运行函数"""
+    # 将7zip压缩格式添加到shutil中
+    shutil.register_archive_format('7zip', pack_7zarchive, description='7zip archive')
+    shutil.register_unpack_format('7zip', ['.7z'], unpack_7zarchive, description='7zip archive')
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_UseHighDpiPixmaps)
     ui = Ui_MainWindow()
