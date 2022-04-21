@@ -6,3 +6,4 @@ Pillow==8.4.0
 PyAudio
 pynput==1.7.5
 PyQt5==5.15.4
+py7zr==0.18.4
