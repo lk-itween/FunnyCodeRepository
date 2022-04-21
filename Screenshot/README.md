@@ -28,6 +28,9 @@ pyaudio读取可录制音频设备，设定需要使用的设备进行录制音�
 - requirements.txt  
 已将所需模块放在requirements.txt中，可直接pip install requirements.txt下载安装。  
 
+- PyAudio-0.2.11-cp37-cp37m-win_amd64.whl  
+python3.7环境的PyAudio的轮子  
+
 
 **ps:**  
 *1. ffmpeg.exe 请至此https://www.gyan.dev/ffmpeg/builds/#release-builds 下载符合的版本，并解压将bin下的ffmpeg.exe移动到resource文件夹下*  
