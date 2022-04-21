@@ -4,7 +4,8 @@
 > windows 10  
 > python 3.7
 
-- Screeshot_Gui.exe
+- Screeshot_Gui.exe [84.0M]  
+将ffmpeg一并打包在exe文件中，且使用pyinstaller打包，生成文件较大  
 [下载地址](https://github.com/lk-itween/FunnyCodeRepository/releases/download/Screenshot_Gui/Screenshot_Gui.exe)
 
 
@@ -28,6 +29,6 @@ pyaudio读取可录制音频设备，设定需要使用的设备进行录制音�
 
 **ps:**  
 *1. ffmpeg.exe 请至此https://www.gyan.dev/ffmpeg/builds/#release-builds 下载符合的版本，并解压将bin下的ffmpeg.exe移动到resource文件夹下*  
-*2. 如果PyAudio包安装不能在线安装，python3.7环境请下载PyAudio-0.2.11-cp37-cp37m-win_amd64.whl至本地，在该路径下打开cmd窗口，执行pip install 该whl文件*  
+*2. 如果PyAudio包不能使用pip在线安装，python3.7环境请下载PyAudio-0.2.11-cp37-cp37m-win_amd64.whl至本地，在该路径下打开cmd窗口，执行pip install 该whl文件*  
 *3. 其他python环境可在https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio 下自行安装对应版本的whl文件*  
 
