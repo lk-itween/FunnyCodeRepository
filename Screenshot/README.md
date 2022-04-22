@@ -26,7 +26,7 @@ pyaudio读取可录制音频设备，设定需要使用的设备进行录制音�
 保存程序运行过程中需要使用到的程序或图片
 
 - requirements.txt  
-已将所需模块放在requirements.txt中，可直接pip install requirements.txt下载安装。  
+已将所需模块放在requirements.txt中，可直接pip install -r requirements.txt下载安装。  
 
 - PyAudio-0.2.11-cp37-cp37m-win_amd64.whl  
 python3.7环境的PyAudio的轮子  
