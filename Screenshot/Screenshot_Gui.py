@@ -88,7 +88,7 @@ class Ui_MainWindow(QMainWindow):
         self.audio = AudioRecord()
         self.audio.get_in_out_devices()
         self.device_name = None
-        self.record_audio = True
+        self.record_audio = True if self.audio.input_dict else False
         self.hotkey_start = False
         self.screenshot = Thread_screenshot()
         self.setupUi()
