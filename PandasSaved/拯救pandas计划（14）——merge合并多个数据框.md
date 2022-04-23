@@ -14,7 +14,17 @@
 
 ## / 数据需求
 
-对以下三组数据框，按`A`列进行横向合并，如同`SQL`里join表操作，最后生成的列名有`A, num, label, count`四列。
+对以下三组数据框，按`A`列进行横向合并，如同`SQL`里join表操作，最后生成的列名有`A, num, label, count`四列。  
+```python
+import pandas as pd
+
+a = pd.DataFrame({'A': ['001', '002', '003'],
+                 'num': [1, 2, 3]})
+b = pd.DataFrame({'A': ['001', '002', '004'],
+                 'lable': ['1', '2', '4']})
+c = pd.DataFrame({'A': ['001', '003', '004'],
+                 'count': [11, 33, 44]})
+```
 
 ![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_1.png)  
 
@@ -92,7 +102,16 @@ a.merge(b, how='outer', on='A').merge(c, how='outer', on='A')
 
 ![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_8.png)  
 
-当需要连接的数据框比较多时，一个一个写就比较费力，可以使用for循环来完成这一目的，在`itertools`模块下有一个累加迭代器可以替换for循环。为了更符合实际操作，将数据框放置到一个列表容器里。  
+当需要连接的数据框比较多时，一个一个写就比较费力，可以使用for循环来完成这一目的，可以使用`reduce`函数来处理这样逐步累积的效果，为了更符合实际操作，将数据框放置到一个列表容器里。  
+```python
+from functools import reduce
+
+data_list = [a, b, c]
+reduce(lambda x, y: x.merge(y, how='outer', on='A'), data_list)
+```
+![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_4.png)  
+
+在`itertools`模块下有一个类似于`reduce`的累加迭代器`accumulate`，也可以替换for循环。  
 
 ```python
 from itertools import accumulate
