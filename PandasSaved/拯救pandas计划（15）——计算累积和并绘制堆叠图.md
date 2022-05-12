@@ -107,7 +107,7 @@ result_df = result_df.expanding(axis=1).sum()
 
 在之前的几篇 *拯救pandas计划系列* 文章里，有接触过如何将一维表展开成二维表。  
 
-（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343，公众号A11Dot派）  
+（手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派）  
 
 可以在`groupby`后面使用`unstack`将索引转换为列名，也可以使用交叉表`crosstab`函数进行计算统计，进行百分比计算时，也只需要添加参数`normalize`就可以轻易计算。  
 
