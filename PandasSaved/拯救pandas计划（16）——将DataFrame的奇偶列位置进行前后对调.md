@@ -27,11 +27,11 @@ en = 'abcdefg'
 df = pd.DataFrame(([i + j for j in en] for i in en), columns=list(en.upper()), index=list(en.upper()))
 ```
 
-![](https://s2.loli.net/2022/05/20/kgM76pdYhjNqaIw.png)  
+![](./img/pandas_save_16_1.png)  
 
 目标样式：  
 
-![](https://s2.loli.net/2022/05/20/fWhKE2dFT7njDvy.png)  
+![](./img/pandas_save_16_2.png)  
 
 可以进行奇偶匹配的相邻两列发生了位置变换，而最后一列`G`无法与其后的数据匹配则无需交换，仍然处于最后位置。  
 
@@ -50,7 +50,7 @@ en = 'abcdef'
 df = pd.DataFrame(([i + j for j in en] for i in en), columns=list(en.upper()), index=list(en.upper()))
 ```
 
-![](https://s2.loli.net/2022/05/20/M7dreVvUuHW39jP.png)  
+![](./img/pandas_save_16_3.png)  
 
 比问题中提到的数据框少了一列`G`，因为是奇偶列且相邻的两列进行对调，可以使用`numpy`将提取出来的奇数列和偶数列组成2\*n的二维数组，再以列方向摊平成一维数组，方法如下。  
 
@@ -65,7 +65,7 @@ new_c = np.array((even_c, odd_c)).flatten('F')
 print(df[new_c])
 ```
 
-![](https://s2.loli.net/2022/05/20/EXUqRoNPYbgjzCn.png)  
+![](./img/pandas_save_16_4.png)  
 
 `df.columns`自身的`values`对象就是np.array类型的，可以直接通过自身的转换一步步达到目的。  
 
@@ -75,7 +75,7 @@ print(df[new_c])
 new_c = df.columns.values.reshape((2, len(df.columns) // 2), order='F')
 ```
 
-![](https://s2.loli.net/2022/05/20/DIRpT5yvskwAKYB.png)  
+![](./img/pandas_save_16_5.png)  
 
 与上一方法不同的是，奇数位置列处于上方，此时将上下位置调换就可以再使用`flatten`方法将数组摊平，并达到奇偶列位置调换的目的。  
 
@@ -83,7 +83,7 @@ new_c = df.columns.values.reshape((2, len(df.columns) // 2), order='F')
 df[new_c[::-1].flatten('F')]
 ```
 
-![](https://s2.loli.net/2022/05/20/2Y8JIX4dueWEybl.png)  
+![](./img/pandas_save_16_6.png)  
 
 上述两种都是将列名提取重新构造形状再转为一维数组形式，完成奇偶列的位置调换。  
 
@@ -138,7 +138,7 @@ new_c = np.hstack((c[:c_middle * 2].reshape((2, c_middle), order='F')[::-1].flat
 [i + (-1) ** i for i in range(len(df.columns))]
 ```
 
-![](https://s2.loli.net/2022/05/20/6bBWt14Ygqriv8A.png)  
+![](./img/pandas_save_16_7.png)  
 
 数据列名为`A-G`，对应的索引为`0-6（包括6）`，使用该方法生成的7是不能从列名中提取的。此时可以使用数据修剪函数，将大于最大索引的数据修正为最大索引。  
 
@@ -148,7 +148,7 @@ import numpy as np
 np.clip([i + (-1) ** i for i in range(len(df.columns))], 0, len(df.columns) - 1)
 ```
 
-![](https://s2.loli.net/2022/05/20/jwUdXE8uOVk2n3D.png)  
+![](./img/pandas_save_16_8.png)  
 
 生成的索引为该数据中最大的索引值，且此之前的列均发生了奇偶列位置对换。  
 
