@@ -26,7 +26,7 @@ c = pd.DataFrame({'A': ['001', '003', '004'],
                  'count': [11, 33, 44]})
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_1.png)  
+![](./img/pandas_save_14_1.png)  
 
 ## / 需求拆解
 
@@ -58,7 +58,7 @@ c = pd.DataFrame({'A': ['001', '003', '004'],
 a.set_index('A').join(b.set_index('A'), on='A', how='outer')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_2.png)  
+![](./img/pandas_save_14_2.png)  
 
 已经按`A`列各元素合并了其他列，若对应列下没有用`nan`填充，可以看到`A`列仍为列名称。  
 
@@ -69,7 +69,7 @@ a.set_index('A').join(b.set_index('A'), on='A', how='outer')
 a.set_index('A').join([b.set_index('A'), c.set_index('A')], how='outer')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_3.png)
+![](./img/pandas_save_14_3.png)
 
 能够完成需求，此时注意到`A`列数据已作为索引列出现，在合并两个数据框时，取消`on`参数的设置，同样会使`A`列作为索引列。  
 
@@ -88,11 +88,11 @@ a.merge(b, how='outer', on='A')
 a.merge(b, how='outer')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_5.png)  
+![](./img/pandas_save_14_5.png)  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_6.png)  
+![](./img/pandas_save_14_6.png)  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_7.png)  
+![](./img/pandas_save_14_7.png)  
 
 三种形式生成的结果是一样的，而需要连接第三个表只需要将前两个的连接的结果与第三个表相连接就行。  
 
@@ -100,7 +100,7 @@ a.merge(b, how='outer')
 a.merge(b, how='outer', on='A').merge(c, how='outer', on='A')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_8.png)  
+![](./img/pandas_save_14_8.png)  
 
 当需要连接的数据框比较多时，一个一个写就比较费力，可以使用for循环来完成这一目的，可以使用`reduce`函数来处理这样逐步累积的效果，为了更符合实际操作，将数据框放置到一个列表容器里。  
 ```python
@@ -109,7 +109,7 @@ from functools import reduce
 data_list = [a, b, c]
 reduce(lambda x, y: x.merge(y, how='outer', on='A'), data_list)
 ```
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_4.png)  
+![](./img/pandas_save_14_4.png)  
 
 在`itertools`模块下有一个类似于`reduce`的累加迭代器`accumulate`，也可以替换for循环。  
 
@@ -129,7 +129,7 @@ result
 
 `accumulate`迭代器将传入的可迭代对象参数（第一个参数），以func函数（第二个参数）需要的参数获取所需数量的参数个数进行操作计算，将每次运行的结果返回至迭代器中，之后的计算中，根据上一次计算的结果作为x参数，当前入参作为y参数依次迭代返回，迭代器结果的最后一个元素就是想要得到的目标值。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_14_10.png)  
+![](./img/pandas_save_14_10.png)  
 
 ## / 总结
 
