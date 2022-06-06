@@ -16,7 +16,7 @@
 
 数据结构如下（`price`列不含`nan`及其他不规范类型的字符串），将`price`列的美元符号`$`和`,`去除掉并转换成浮点类型。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_7_1.png)
+![](./img/pandas_save_7_1.png)
 
 ## / 需求拆解
 
@@ -35,7 +35,7 @@
 data['price'] = [float(i.replace('$', '').replace(',', '')) for i in data['price']]
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_7_2.png)
+![](./img/pandas_save_7_2.png)
 
 - 使用re模块  
 
@@ -86,7 +86,7 @@ data['price'].map(lambda x: ''.join(x.lstrip('$').split(','))).astype(float)
 
 细看`price`列是一个dtype = 'object'类别的列，这样也能使用pandas中的`.str.split`方法。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_7_3.png)
+![](./img/pandas_save_7_3.png)
 
 ```python
 # .str.strip.str.split代替strip.split
