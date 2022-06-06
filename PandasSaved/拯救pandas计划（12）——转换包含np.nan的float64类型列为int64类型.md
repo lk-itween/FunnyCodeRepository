@@ -30,7 +30,7 @@ df = pd.DataFrame(
 
 打印出样式和各列的类型，看出圈出的两列数据发生了微妙的改变，`None`在浮点型数据丛中自动转换成了`np.nan`，而`pd.NA`以`<NA>`显示，列类型除[0, 3]列外都是`float64`，似乎是`pd.NA`让列类型变化了。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_12_1.png)
+![](./img/pandas_save_12_1.png)
 
 ## / 需求拆解
 
