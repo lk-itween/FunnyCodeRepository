@@ -16,7 +16,7 @@
 
 对以下数据中分析各产品的各个使用时长的数量在该产品中的数量占比，并按年份从小到大绘制堆叠图。  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_1.png)  
+![](./img/pandas_save_15_1.png)  
 
 ## / 数据准备
 
@@ -68,11 +68,11 @@ product_data = pd.read_csv('random_product_lost_money_data.gz', encoding='utf-8'
 product_data.groupby(['产品'])['使用时长'].value_counts()
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_2.png)  
+![](./img/pandas_save_15_2.png)  
 
 生成的是一个含多级索引的Series对象。离目标样式相差甚远，样式类似于下图所示：  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_3.png)  
+![](./img/pandas_save_15_3.png)  
 
 假设在不知道其他用法的情况下，将groupby后的对象转成样式表的样例，需要遍历groupby后的结果，逐一赋值到样式表中。  
 
@@ -85,7 +85,7 @@ for (i, j), value in used_year_df.items():
     result_df.loc[i, j] = value  
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_5.png)  
+![](./img/pandas_save_15_5.png)  
 
 计算各产品的每列的占比，需要分别求和，再分别求商（可运用`numpy`数组的广播机制）。  
 
@@ -93,7 +93,7 @@ for (i, j), value in used_year_df.items():
 result_df.loc[:, result_df.columns] = result_df.values / result_df.values.sum(axis=1).reshape(len(result_df), 1)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_6.png)   
+![](./img/pandas_save_15_6.png)   
 
 为了在绘制堆叠图时，能够比较轻松地编写代码，可以在这一步将每个产品进行累加求和，然后通过`for`循环，从使用时长最大到最小依次绘制柱状图即可实现堆叠图。  
 
@@ -103,7 +103,7 @@ result_df = result_df.cumsum(axis=1)
 result_df = result_df.expanding(axis=1).sum()
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_7.png)  
+![](./img/pandas_save_15_7.png)  
 
 在之前的几篇 *拯救pandas计划系列* 文章里，有接触过如何将一维表展开成二维表。  
 
@@ -129,7 +129,7 @@ pd.crosstab(product_data['产品'], product_data['使用时长'], product_data['
 
 `crosstab`将`产品`作为索引，`使用时长`即作为列名，又作为统计对象进行计数，`normalize='index'`对结果按行进行规范化。  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_8.png)  
+![](./img/pandas_save_15_8.png)  
 
 接下来绘制堆叠图，前面有提到，要将使用时长最长的先绘制，后面时长小的再覆盖，就能在图形上看到各个使用时长的占比情况。  
 
@@ -155,7 +155,7 @@ plt.show()nd()
 plt.show()
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_15_9.png)  
+![](./img/pandas_save_15_9.png)  
 
 将值乘以100，用百分比的形式呈现，仅绘制了【1年~5年】的情况。可根据各颜色的长度来观察各产品间各使用时长的数量占比情况。  
 
