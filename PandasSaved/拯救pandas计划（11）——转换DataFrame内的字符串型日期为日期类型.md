@@ -103,7 +103,7 @@ pd.to_datetime(['03Apr2022',
                unit='ns')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_11_1.png)
+![](./img/pandas_save_11_1.png)
 
 可以看到几个对应颜色的再转换过程出了点意外，在未设置format参数时，都可以很好的转换，在需要转换的日期列中，只要格式不是特别特殊的情况下完全不用设置format参数。
 
@@ -134,7 +134,7 @@ DatetimeIndex(['2022-03-01'], dtype='datetime64[ns]', freq=None)
 
 上面的例子中的都是对字符串转换，也有提到过几乎不用设置日期格式就能转换日期，还有一种在日期操作中经常会遇见的格式，就是时间戳类型的数据，这个转换为日期当然也不在话下，同样可以与上述日期转换混合在一起使用，而又注意到，转换后的时间单位都是ns，所以在未设置unit参数为其他单位时，需要传入ns为单位的时间戳数据。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_11_2.png)
+![](./img/pandas_save_11_2.png)
 
 可以针对时间戳数据设置不同的unit参数来转换，当然同次转换的列中单位理应一致。
 
