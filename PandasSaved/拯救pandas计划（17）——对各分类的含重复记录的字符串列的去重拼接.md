@@ -24,7 +24,7 @@ df = pd.DataFrame( {'id' : np.tile((['A'], ['B'], ['C']), 6).flatten(),
                     'fruits' : ['苹果', '香蕉', '梨', '苹果', '桃子', '西瓜', '香蕉', '梨', '苹果', '西红柿', '梨', '西瓜', '西瓜', '西瓜', '香蕉', '西瓜', '西瓜', '西瓜']})
 ```
 
-![](https://s2.loli.net/2022/05/27/mUJca2QI6Z8PHTK.png)  
+![](./img/pandas_save_17_1.png)  
 
 ## / 需求拆解
 
@@ -42,7 +42,7 @@ df = pd.DataFrame( {'id' : np.tile((['A'], ['B'], ['C']), 6).flatten(),
 df.drop_duplicates().groupby(['id', 'type'], as_index=False).agg(lambda x: ', '.join(x))
 ```
 
-![](https://s2.loli.net/2022/05/27/bfcpgyZxKCJWq8E.png)  
+![](./img/pandas_save_17_2.png)  
 
 设置在（A, 1)分类中多余的苹果去除掉了。  
 
@@ -58,7 +58,7 @@ df.drop_duplicates().groupby(['id', 'type'], as_index=False).agg(lambda x: ', '.
 df.groupby(['id', 'type']).agg(set)['fruits'].map(lambda x: ', '.join(x)).reset_index()
 ```
 
-![](https://s2.loli.net/2022/05/27/PitpUnG8O2sDAFW.png)  
+![](./img/pandas_save_17_3.png)  
 
 这里注意，`agg(set)`后是`DataFrame`对象，需要索引出`fruits`列，才可以继续往下操作，可能会注意与上一方法不同点，在重置索引时放在了最后，为能让`fruits`列正常被拼接，需要将聚合列作为索引列处理，最后才重置索引为列。  
 
@@ -70,7 +70,7 @@ df.groupby(['id', 'type']).agg(set)['fruits'].map(lambda x: ', '.join(x)).reset_
 df.groupby(['id','type'])['fruits'].unique().str.join(', ').reset_index()
 ```
 
-![](https://s2.loli.net/2022/05/27/D9o3rMzTLgHlk1K.png)  
+![](./img/pandas_save_17_4.png)  
 
 `fruits`列本身是一个字符串类型，相比于上两种又可以使用更为特性的拼接方法`.str.join()`，按行遍历，对每行的数据进行拼接，这里的行中的元素不一定为列表，与`''.join`类型，为可迭代对象即可。上文提到，`unique`是属于`Series`中的一种方法，依然需要在所有分类去重拼接处理完后再将索引重置为列。  
 
