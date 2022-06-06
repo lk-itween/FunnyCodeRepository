@@ -16,7 +16,7 @@
 
 现有一组数据，包含类别列，日期列，以及其他需要进行差异值计算的数值列，如计算苹果在**2022-01-02**卖出的数量比**2022-01-01**卖出的数量多了多少。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_10_1.png)
+![](./img/pandas_save_10_1.png)
 
 ## / 需求拆解
 
@@ -37,7 +37,7 @@ data.sort_values(['类型', '日期'], inplace=True)
 data[['进货diff', '卖出diff']] = data.groupby(['类型']).apply(lambda x: x[['进货总量', '卖出总量']].diff()).values
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_10_2.png)
+![](./img/pandas_save_10_2.png)
 
 可以看到每个类型的首日和其他日期计算的结果是正确的。
 
@@ -51,7 +51,7 @@ data.sort_values(['类型', '日期'], inplace=True)
 data[['进货diff', '卖出diff']] = data.groupby(['类型'])[['进货总量', '卖出总量']].diff()
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_10_3.png)
+![](./img/pandas_save_10_3.png)
 
 得出的结果与方法一是一样的。
 
@@ -64,7 +64,7 @@ data[['进货diff', '卖出diff']] = data.groupby(['类型'])[['进货总量', '
 data[['进货diff', '卖出diff']] = data.groupby(['类型']).transform(lambda x: x.diff())[['进货总量', '卖出总量']]
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_10_4.png)
+![](./img/pandas_save_10_4.png)
 
 - 方法四
 
