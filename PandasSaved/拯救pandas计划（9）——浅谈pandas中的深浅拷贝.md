@@ -82,7 +82,7 @@ df_copy = df.copy() # 深复制
 
 生成df，包含3列数据，A列为数值型，不可变对象， B和C都是可变对象。
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/wuxiu/pandas_9_1.png)
+![](./img/pandas_9_1.png)
 
 查看深浅复制对象，都与原对象不同，说明完成拷贝。
 
@@ -92,7 +92,7 @@ df_copy = df.copy() # 深复制
 df.loc[0, 'A'] = 50
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/wuxiu/pandas_9_3.png)
+![](./img/pandas_9_3.png)
 
 **df_shallow**会跟着df的改变而发生改变，而**df_copy**不会发生变化，也证实了`df.copy(deep=False)`是浅层复制，新建了一个与**df**数据内容及索引相同的但对象不同的数据框。
 
@@ -102,11 +102,11 @@ df.loc[0, 'A'] = 50
 df.loc[0, 'B'][0] = 'lihai'
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/wuxiu/pandas_9_4.png)
+![](./img/pandas_9_4.png)
 
 在B列修改过程中所有复制出来的数据框都发生了变化，正如`Notes`所说，是对对象的引用，是直接修改引用到的数据，那么在数据框显示部分看到B列的内容发生变化，原始数据内容是否也已经改变，打印data：
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/wuxiu/pandas_9_5.png)
+![](./img/pandas_9_5.png)
 
 data中的B所对应的值也已经发生改变，那么有什么方法可以仅改变深复制后的数据对象，又不改变原始数据，这里需要借助copy模块，C列的数据层次与B列一样，下面修改C列数据。
 
@@ -133,7 +133,7 @@ df_copy['C'].apply(value_upper)  # 未实际改变df_copy['C']
 df_copy['C'] = df_copy['C'].apply(value_upper) 
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/wuxiu/pandas_9_7.png)
+![](./img/pandas_9_7.png)
 
 可以看到仅df_copy['C']发生了变化。
 
