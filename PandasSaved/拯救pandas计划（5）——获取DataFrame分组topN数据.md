@@ -15,10 +15,10 @@
 ## / 数据需求
 
 现有一组数据，需要根据`name`进行分组，以`date_col`顺序排序，获取每组数据的前N项数据。  
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_1.png)
+![](./img/pandas_save_5_1.png)
 
 为考虑比较各方案间的耗时，此次数据采用数据类别多量小的数据集。  
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_2.png)
+![](./img/pandas_save_5_2.png)
 
 ## / 需求拆解
 
@@ -36,11 +36,11 @@ df.sort_values(['name', 'date_col'], inplace=True)
 df.groupby(['name']).head(1)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_3.png)  
+![](./img/pandas_save_5_3.png)  
 
 **先分组，后排序**  
 由于groupby后面不能直接跟sort_values，所以需要调用`apply`来对每个分组进行排序。
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_4.png)
+![](./img/pandas_save_5_4.png)
 
 分组后排序用时：
 
@@ -48,9 +48,9 @@ df.groupby(['name']).head(1)
 df.groupby(['name']).apply(lambda x: x.sort_values('date_col').head(1)).reset_index(drop=True)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_5.png)  
+![](./img/pandas_save_5_5.png)  
 看到这运行时间差了一个数量级，可能会怀疑是不是sort_values的问题，都知道`pandas`调用内部函数时运行效率还算是过的去，怎么在这差了这么多，直接在groupby后面运行head()仅200ms，这会可以看看在apply里调用head()。  
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_6.png)  
+![](./img/pandas_save_5_6.png)  
 在上图可以看出拖慢运行时间的主要原因不是sort_values，而是apply，虽然apply的工作机制方便了对数据框内的数据进行各种各样的处理操作，但当存在一种内部函数可以满足需求时再选择使用apply就会稍显鸡肋。  
 （手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派）  
 简言之，在这种方式处理上，先排序再分组取topN是能够较快的得到目标数据。  
@@ -64,7 +64,7 @@ df.sort_values(['name', 'date_col'], inplace=True)
 df.drop_duplicates(['name'])  # 默认保留首个
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_7.png)
+![](./img/pandas_save_5_7.png)
 
 ### 方法三
 
@@ -89,7 +89,7 @@ name_count = df.value_counts('name', sort=False)
 name_count.map(lambda x: range(x))
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_8.png)  
+![](./img/pandas_save_5_8.png)  
 从生成的结果看来，`Series`中的`values`是一个可迭代序列，这种结果不能直接对原始数据框设置编号，取出`values`，使用`np.hstack`以行方向组合,对每个分组编号组合成一个一维数组。
 
 ```python
@@ -99,13 +99,13 @@ df.sort_values(['name', 'date_col'], inplace=True)
 np.hstack(df.value_counts('name', sort=False).map(lambda x: range(x)).values)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_9.png)  
+![](./img/pandas_save_5_9.png)  
 ps: `values`中的每个值都是一维数组
 
 - 取值：
 
 再对生成的值与想要提取的topN的N进行对比，进行布尔索引提取即可得到想要的topN数据。运行结果如下，时间上也能接受：   
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_5_10.png)  
+![](./img/pandas_save_5_10.png)  
 以下是将这段代码进行封装成函数：
 
 ```python
