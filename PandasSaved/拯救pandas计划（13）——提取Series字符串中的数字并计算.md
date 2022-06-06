@@ -26,7 +26,7 @@ df = pd.DataFrame({
 df
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_1.png)  
+![](./img/pandas_save_13_1.png)  
 
 ## / 需求拆解
 
@@ -76,7 +76,7 @@ df['平均年数'] = df['年区间'].apply(year_average)
 
 运行后数据显示：  
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_2.png)
+![](./img/pandas_save_13_2.png)
 
 通过`apply`调用`year_average`函数，进行正则查找提取并完成后续计算，逻辑上也比较清晰易懂，之前在[拯救pandas计划（7）——对含金额标志的字符串列转换为浮点类型数据](https://blog.csdn.net/weixin_46281427/article/details/122900919)中有提到过pd.Series类如果为object类型或者string类型，是有个`.str`方法，可以针对字符串做一些特性操作，在这其中也有提取函数`.str.extract`，同样可以使用正则表达式。    
 
@@ -86,7 +86,7 @@ df['平均年数'] = df['年区间'].apply(year_average)
 df_dash = df['年区间'].str.extract(r'(\d+)?-?(\d+)')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_3.png)
+![](./img/pandas_save_13_3.png)
 
 顺利提取出来了，接下的操作和re部分的一样，转换成浮点型数据再计算平均值，可以看到行号为1的行中，两列都为`np.nan`，所以在计算后还是`np.nan`，需要对`np.nan`用`0`填充，对计算结果进行四舍五入。  
 
@@ -95,7 +95,7 @@ df['平均年数2'] = df_dash.astype(float).mean(axis=1).fillna(0).round(0)
 df
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_4.png)
+![](./img/pandas_save_13_4.png)
 
 与上一次计算出来的结果是一致的。  
 
@@ -112,7 +112,7 @@ df
 df_dash = df['薪资'].replace({'万': '@10000', '千': '@1000', '月': '1', '年': '12'}, regex=True)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_5.png)
+![](./img/pandas_save_13_5.png)
 
 仔细观察一番，正则表达式如下：  
 
@@ -126,7 +126,7 @@ re.compile(r'(\d+\.?\d*)?-?(\d+\.?\d*)?@(\d+)/(\d+)')
 df_dash = df_dash.str.extract(r'(\d+\.?\d*)?-?(\d+\.?\d*)?@(\d+)/(\d+)').astype(float)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_6.png)  
+![](./img/pandas_save_13_6.png)  
 和设想的一样，生成了4列数据，在提取之后使用了astype类型转换方法，类型均为float类型。  
 
 转换为月薪资：
@@ -135,7 +135,7 @@ df_dash = df_dash.str.extract(r'(\d+\.?\d*)?-?(\d+\.?\d*)?@(\d+)/(\d+)').astype(
 df_dash.apply(lambda x: (x[[0, 1]] * x[2]) / x[3], axis=1)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_13_7.png)  
+![](./img/pandas_save_13_7.png)  
 
 通过上述一系列操作，最终将字符串类型的数据转换为浮点型数字格式，也达到了所想要的结果。  
 
