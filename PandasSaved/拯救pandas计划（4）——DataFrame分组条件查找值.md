@@ -16,7 +16,7 @@
 
 依据各个用户的判断标签，且按照【甲乙丙丁……】依次排序，取得每个用户优先级最高的数据，其他标签列保留。如下图所示：
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_1.png)
+![](./img/pandas_save_4_1.png)
 
 ## / 需求拆解
 
@@ -32,7 +32,7 @@
 df['其他标签'] = df['其他标签'].map(lambda x: [x])
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_2.png)  
+![](./img/pandas_save_4_2.png)  
 
 再按每用户每判断标签进行聚合，在上一步把其他标签处理成`list`类型，间接的方便了这里的聚合，使用`sum`对列表进行累加。
 
@@ -40,7 +40,7 @@ df['其他标签'] = df['其他标签'].map(lambda x: [x])
 df = df.groupby(['用户', '判断标签'], as_index=False)['其他标签'].sum()
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_3.png)  
+![](./img/pandas_save_4_3.png)  
 
 之后对判断标签进行排序，这里说明下，早期pandas包的`.sort_values`没有`key`参数，需要自行升级包才能使用，在没有key参数之前对列进行自定义排序是一件比较麻烦的事，需要生成类别序列在该列上，这里只需要将每种类型用字典的形式，规范化各类别的顺序，通过`key`参数，调用`map`函数即可简单且快速的自定义列排序。
 
@@ -48,7 +48,7 @@ df = df.groupby(['用户', '判断标签'], as_index=False)['其他标签'].sum(
 df.sort_values('判断标签', key=lambda x: x.map({'甲': 1, '乙': 2, '丙': 3, '丁': 4}), inplace=True)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_4.png)
+![](./img/pandas_save_4_4.png)
 
 可以注意到，每用户每判断类型只有一行，顺序升序，这里只取优先级较高的判断标签，可以使用去重函数，保留第一次出现的行即可
 
@@ -56,7 +56,7 @@ df.sort_values('判断标签', key=lambda x: x.map({'甲': 1, '乙': 2, '丙': 3
 df.drop_duplicates('用户', inplace=True)
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_5.png)
+![](./img/pandas_save_4_5.png)
 
 现在离我们的目标还差一步之遥，唯一的区别就是其他标签是`list`类型，最后使用`explode`方法，单行生成多行的方式处理成目标形式。
 
@@ -64,7 +64,7 @@ df.drop_duplicates('用户', inplace=True)
 df.explode('其他标签')
 ```
 
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_6.png)  
+![](./img/pandas_save_4_6.png)  
 大功告成！
 
 ### 方法二：
@@ -82,7 +82,7 @@ df.groupby(['用户']).apply(get_first_label).reset_index(drop=True)
 ```
 
 结果：
-![](https://gitee.com/kangliz/pic-drawing-bed/raw/master/picture/pandas_save/pandas_save_4_7.png)
+![](./img/pandas_save_4_7.png)
 
 ## / 总结
 
