@@ -27,7 +27,7 @@ df_new['YearMonth'] = df_new['InvoiceDate'].map(lambda x: 100 * x.year + x.month
 
 **ps:** 数据获取方式，后台回复【零售】。  
 
-![](https://s2.loli.net/2022/06/22/SX3hzdikV8jOfFa.png)  
+![](./img/pandas_save_20_1.png)  
 
 (406829, 9)  
 
@@ -43,9 +43,9 @@ df_new.groupby('InvoiceNo')['YearMonth'].unique().value_counts().sort_index()
 
 `pandas`从2020年发展至今已更新多次，此前书中方法可能无法执行，如此处会产生如下报错，原因为`unique()`执行后每行数据为列表类型，`value_counts`不能处理。  
 
-![](https://s2.loli.net/2022/06/22/iODkVFeo2fMIhb6.png)  
+![](./img/pandas_save_20_2.png)  
 
-![](https://s2.loli.net/2022/06/22/z14HEuCix3OQSnV.png)  
+![](./img/pandas_save_20_3.png)  
 
 将代码更改如下就可以完成需求。  
 
@@ -53,7 +53,7 @@ df_new.groupby('InvoiceNo')['YearMonth'].unique().value_counts().sort_index()
 df_new.groupby('InvoiceNo')['YearMonth'].unique().explode().value_counts().sort_index()
 ```
 
-![](https://s2.loli.net/2022/06/22/dtwZRqpLbhrYGMa.png)   
+![](./img/pandas_save_20_4.png)   
 
 （手动水印：原创CSDN宿者朽命，https://blog.csdn.net/weixin_46281427?spm=1011.2124.3001.5343 ，公众号A11Dot派)
 
@@ -65,7 +65,7 @@ df_new.groupby('InvoiceNo')['YearMonth'].value_counts().reset_index(name='count'
 
 第一个`value_counts`的作用就是对`YearMonth`去重，需要的列名已作为索引，通过`reset_index`将索引重置为列数据，再对`YearMonth`进行`value_counts`统计每月的订单量。  
 
-![](https://s2.loli.net/2022/06/22/P5aNltXCZTJFyqj.png)  
+![](./img/pandas_save_20_5.png)  
 
 在同一台电脑上，这一方法比书中提到的方法要快，可能`unique`在处理上需要消耗一定时间，然而这种处理却把思想弄复杂了，`pandas`去重处理可以直接使用`drop_duplicates`。  
 
@@ -75,7 +75,7 @@ df_new.groupby('InvoiceNo')['YearMonth'].value_counts().reset_index(name='count'
 df_new[['InvoiceNo', 'YearMonth']].drop_duplicates()['YearMonth'].value_counts().sort_index()
 ```
 
-![](https://s2.loli.net/2022/06/22/hmPdnbB1WtaDcuK.png)   
+![](./img/pandas_save_20_6.png)   
 
 对比前两种方法，代码简短了不少，处理时间也减少了。  
 
