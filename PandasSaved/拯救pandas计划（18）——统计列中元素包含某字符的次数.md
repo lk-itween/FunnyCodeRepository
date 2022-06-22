@@ -22,7 +22,7 @@ import pandas as pd
 s = pd.Series(['Brown', 'Golden', 'Oracle', 'Mysql', 'Python', 'White', 'Apple'])
 ```
 
-![](https://s2.loli.net/2022/06/13/tWivcLxZTobj5qN.png)  
+![](./img/pandas_save_18_1.png)  
 
 ## 需求处理
 
@@ -45,7 +45,7 @@ s.str.lower().str.count('p')
 
 两种方法均可实现需求，结果如下：  
 
-![](https://s2.loli.net/2022/06/13/9taqkjz5C4d3HmP.png)  
+![](./img/pandas_save_18_2.png)  
 
 2. 统计字符串包含指定两个字符（'a'和'p'）的数量和，不区分大小写  
 - 方法三：`str.findall`  
@@ -58,7 +58,7 @@ s.str.findall(r'[ap]', flags=re.I).str.len()
 
 这种通过正则表达式的方式对字符内容进行匹配，返回对象为列表，再调用`len`方法统计列表的长度。  
 
-![](https://s2.loli.net/2022/06/13/HTZiIKQW3skb2pr.png)  
+![](./img/pandas_save_18_3.png)  
 
 - 方法四：`str.extractall`  
 
@@ -68,7 +68,8 @@ s.str.findall(r'[ap]', flags=re.I).str.len()
 s.str.extractall(r'([ap])', flags=re.I).groupby(level=0).size()  
 ```
 
-与`findall`不同的是生成的对象为`DataFrame`，并且增加了一组`match`索引，统计数量需要对原索引聚合再返回各组数量大小，如了解`groupby.filter`方法可将此`extractall`的执行顺序置后。  ![](https://s2.loli.net/2022/06/13/rnjpkbTHFdgQVlX.png)  
+与`findall`不同的是生成的对象为`DataFrame`，并且增加了一组`match`索引，统计数量需要对原索引聚合再返回各组数量大小，如了解`groupby.filter`方法可将此`extractall`的执行顺序置后。  
+![](./img/pandas_save_18_4.png)  
 
 上两种方法仅对字符串中包含指定字符其一即可，如'Oracle'只包含'a'，'Python'只包含'p'，'Apple'两个都包含。  
 
@@ -81,7 +82,7 @@ s.str.extractall(r'([ap])', flags=re.I).groupby(level=0).size()
 
 `findall`结果：  
 
-![](https://s2.loli.net/2022/06/13/tw93LabfJR2dSxA.png)  
+![](./img/pandas_save_18_5.png)  
 
 `extractall`结果：  
 
@@ -89,7 +90,7 @@ s.str.extractall(r'([ap])', flags=re.I).groupby(level=0).size()
 s.str.extractall(r'([ap])?([oe])?', flags=re.I).groupby(level=0).count().replace({0: pd.NA}).sum(axis=1, skipna=False)
 ```
 
-![](https://s2.loli.net/2022/06/13/2FbpnvPsgCHmxl1.png)  
+![](./img/pandas_save_18_6.png)  
 
 `count`统计每个字符串包含每个分组的数量，为了能够正常统计满足要求的字符串数量，需要对`0`替换成`pd.NA`，在`sum`中不计算空缺值，统计的结果就只对满足要求的字符串进行了统计，如'Oracle'即含有'a'又含有'e'。  
 
