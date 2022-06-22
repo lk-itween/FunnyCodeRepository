@@ -31,7 +31,7 @@ df = pd.DataFrame(data, columns=list('abcdefghij'), index=[f'测试_{i}' for i i
 
 数据大小为：60\*10，浮点型类型。  
 
-![](https://s2.loli.net/2022/06/21/sngZOCA7xymc5Li.png)  
+![](./img/pandas_save_19_1.png)  
 
 ## / 需求处理
 
@@ -51,7 +51,7 @@ df_merge = pd.merge(left=df, right=df, left_on='one', right_on='one')
 
 原数据大小为60\*10，乘积后为3600行，内存占用大小相比处理前大了不少，如果数据过大，在处理方面，耗时上会显著增加。  
 
-![](https://s2.loli.net/2022/06/21/UjVYfzqeK5sWond.png)  
+![](./img/pandas_save_19_2.png)  
 
 暂且不考虑数据量的影响，继续处理。  
 
@@ -84,7 +84,7 @@ df_result = df_merge.groupby('名称_x').apply(get_top_sims)
 
 通过复现解答大佬的代码如上，顺利返回了相似度前五的数据框。可以看到在60条数据中使用笛卡尔积进行计算，耗用时间是可以接受的。  
 
-![](https://s2.loli.net/2022/06/21/jqv4DVCcg1KBFwk.png)  
+![](./img/pandas_save_19_3.png)  
 
 - 方法二：将每一行数据与原数据直接相减，利用pandas特性求和  
 
@@ -104,7 +104,7 @@ df_result = df.apply(get_sims, axis=1)
 
 使用广播的特性将方法一中的函数优化为`get_sims`函数，在计算效率上也大大提高。  
 
-![](https://s2.loli.net/2022/06/21/rYyklWCzXgNZnp5.png)  
+![](./img/pandas_save_19_4.png)  
 
 ## / 总结
 
