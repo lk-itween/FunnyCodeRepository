@@ -26,7 +26,7 @@ data = {
 df = pd.DataFrame(data)
 ```
 
-![](https://s2.loli.net/2022/07/04/fOhF3WjVJne8G5g.png)  
+![](./img/pandas_save_22_1.png)  
 
 ## / 需求处理
 
@@ -59,7 +59,7 @@ df['num'].str.extract(r'(\d)')
 
 默认`expand`为True，返回的结果是DataFrame类型，可以改成False，那么返回值就是Series，写法类似于re中的search函数，需要用括号将需要提取的值括起来，当然也能设置返回的列名。  
 
-![](https://s2.loli.net/2022/07/07/y2rq98BKMUFLgSz.png)  
+![](./img/pandas_save_22_2.png)  
 
 ```python
 df['num'].str.extractall(r'^(\d)')
@@ -67,7 +67,7 @@ df['num'].str.extractall(r'^(\d)')
 
 对比`extract`，`extractall`的表达式更为细致，如不在表达式中添加`^`符号以表明只匹配首字符，那么会将待匹配字符串中符合表达式的字符全部提取出来，`extract`有点像`re.match`，结果会多生成一个名为match的索引，来记录每行匹配到的顺序。  
 
-![](https://s2.loli.net/2022/07/08/VtdRKCDeJWTIXQw.png)  
+![](./img/pandas_save_22_3.png)  
 
 2. 提取`num`列中首尾的两个字符且为数字   
 
@@ -79,7 +79,7 @@ df['num'].str.extract(r'^(\d)?.*?(\d)$', re.S)
 
 这里用re.S模式，让`.`可以匹配换行符，当匹配的组数多了，对应生成的列就多了，自然expand的参数就无效了，同样也能用`?P`设置返回的列名。  
 
-![](https://s2.loli.net/2022/07/07/dpgqrCWO7Rwm4I3.png)  
+![](./img/pandas_save_22_4.png)  
 
 适应只有一个字符的情况，将匹配的第一个字符做了可有可无处理，比如`num`列的第二个数据，其中只有一个2，可以按情形设置匹配的表达式。
 
@@ -89,7 +89,7 @@ import re
 df['num'].str.extractall(r'^(\d)?.*?(\d)$', re.S)
 ```
 
-![](https://s2.loli.net/2022/07/08/nklRBuYWE8QOota.png)  
+![](./img/pandas_save_22_5.png)  
 
 除会多生成一个match索引外，两者没有其他区别。  
 
@@ -102,7 +102,7 @@ df['string'].str.extractall(r'(水泥|打灰)')
 
 在括号中写上两个关键字，用竖线`|`隔开，可以看到两种方法的结果区别很明显，左边只匹配返回第一个匹配到的关键字，而右边将所有能匹配到的都会返回。  
 
-![](https://s2.loli.net/2022/07/08/f2z3rUGepmFCDVx.png)  
+![](./img/pandas_save_22_6.png)  
 
 4. 匹配返回`string`列中两个关键字都存在的行  
 
@@ -114,7 +114,7 @@ df['string'].str.extract(r'(?=.*打灰)(?=.*水泥)(.*)')
 
 这里用`(.*)`作为返回的结果，需要注意的是，如果需要`.`能匹配`\n`，用re.S模式。  
 
-![](https://s2.loli.net/2022/07/08/BgVA5I8nKsjqhJT.png)  
+![](./img/pandas_save_22_7.png)  
 
 `extractall`除使用同样的表达式之外，在上一个方法能得知，会将所有符合条件的部分都返回，那么可以对结果进行分组去重统计，如果统计结果等于关键字的数量，就说明都存在，进而返回符合条件的行。  
 
@@ -128,7 +128,7 @@ extract = df['string'].str.extractall(fr'({pattern})').groupby(level=0).nunique(
 df.loc[extract[extract[0] == len(keywords)].index]
 ```
 
-![](https://s2.loli.net/2022/07/11/YIQj14WfkyAtx8e.png)  
+![](./img/pandas_save_22_8.png)  
 
 ## / 总结
 
