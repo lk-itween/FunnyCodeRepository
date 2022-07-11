@@ -26,11 +26,11 @@ df = df.dropna().copy()
 
 **ps:** 数据获取方式，后台回复【零售】。  
 
-![](https://s2.loli.net/2022/06/22/SX3hzdikV8jOfFa.png)  
+![](./img/pandas_save_20_1.png)  
 
 (406829, 9)    
 
-![](https://s2.loli.net/2022/06/24/CZUK85XoSmscwRD.png)   
+![](./img/pandas_save_21_1.png)   
 
 ## / 需求处理
 
@@ -46,7 +46,7 @@ def get_month_start(x):
 df['MonthStart'] = df['InvoiceDate'].map(get_month_start)
 ```
 
-![](https://s2.loli.net/2022/06/24/XMrsgK9lEzh8Ja2.png)  
+![](./img/pandas_save_21_2.png)  
 
 - pandas...MonthBegin, MonthEnd
 
@@ -60,13 +60,13 @@ df2 = pd.to_datetime(['2022-9-1', '2022-9-2', '2022-9-29', '2022-9-30',
                       '2022-10-1', '2022-10-2', '2022-10-30', '2022-10-31']).to_frame(name='date')
 ```
 
-![](https://s2.loli.net/2022/06/24/OSaWxJAIH5NtVBL.png)  
+![](./img/pandas_save_21_3.png)  
 
 将间隔参数`n`设置成0，即为获取当月的月初月末日期，在图中可以清晰的看出当仅为月初日期时才能正确的获取当月月初日期，其余日期将获取成下月月初日期，而月末日期可以正确获取。  
 
 再将间隔参数`n`设置为1，获取下一月日期，效果如下：  
 
-![](https://s2.loli.net/2022/06/24/9ugsmrBJXbRYnLh.png)  
+![](./img/pandas_save_21_4.png)  
 
 此时月初函数是可以正确获取到下一月的月初日期，而月末函数只有当日期为月末时才能正确获取下月月末日期。  
 
@@ -74,11 +74,11 @@ df2 = pd.to_datetime(['2022-9-1', '2022-9-2', '2022-9-29', '2022-9-30',
 
 > 本月月初：
 > 
-> ![](https://s2.loli.net/2022/06/24/OnEbzrpmXNyGTkL.png)  
+> ![](./img/pandas_save_21_5.png)  
 
 > 下月月末：  
 > 
-> ![](https://s2.loli.net/2022/06/24/W1uOQKSidLwXpDs.png)   
+> ![](./img/pandas_save_21_6.png)   
 
 df['InvoiceDate']中的日期数据是包含时间的，在获取月初月末时并不会将时间给剔掉，使用`.dt.floor('D')`截取成日期后再获取。  
 
@@ -86,7 +86,7 @@ df['InvoiceDate']中的日期数据是包含时间的，在获取月初月末时
 df['InvoiceDate'].dt.floor('D') +  MonthBegin() - MonthBegin()
 ```
 
-![](https://s2.loli.net/2022/06/24/RXHg9N8xzbwmD3M.png)  
+![](./img/pandas_save_21_7.png)  
 
 使用这个方法转换所需时间相比书中给出的方法是非常少的。  
 
@@ -100,15 +100,15 @@ df['InvoiceDate'].dt.floor('D') +  MonthBegin() - MonthBegin()
 df3 = pd.period_range('2021-10', '2022-05', freq='M').to_frame(name='date')
 ```
 
-![](https://s2.loli.net/2022/06/24/Mtidmlrwo6FQbWX.png)  
+![](./img/pandas_save_21_8.png)  
 
 生成了一组以月为周期的日期数据。对于已经是日期类型的数据可以使用`.dt.to_period`方法进行转换。  
 
-![](https://s2.loli.net/2022/06/24/fL7DFXB6qyaIsUu.png)  
+![](./img/pandas_save_21_9.png)  
 
 周期型数据相比日期的`dt`方法，多了`start_time`和`end_time`，分别获取当前日期的月初日期和月末日期。  
 
-![](https://s2.loli.net/2022/06/24/UQHeLuC5cMV3yDr.png)  
+![](./img/pandas_save_21_10.png)  
 
 由于`end_time`会直接返回毫秒级的最后一个时刻，需要用`floor`截取出日期。  
 
@@ -135,9 +135,9 @@ df3['date'].dt.asfreq('D', 'E')
 
 对比两种在示例数据中的耗时情况。  
 
-![](https://s2.loli.net/2022/06/24/5yMBXa9IUxiCc13.png)  
+![](./img/pandas_save_21_11.png)  
 
-![](https://s2.loli.net/2022/06/24/p2JbL7isV9OBcRn.png)  
+![](./img/pandas_save_21_12.png)  
 
 `asfreq`似乎要比`start_time`耗时短一点，同时注意到转换后的结果类型不一样，两个的dt方法的部分属性、方法有所不同，若需要将周期类型转换成日期类型，可以将`asfreq`更改成`to_timestamp`，参数一致，耗时略微长一点，结果与`start_time`类似。  
 
