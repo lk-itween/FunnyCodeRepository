@@ -43,3 +43,5 @@
 [拯救pandas计划（21）——获取指定日期所属月的月初月末](./拯救pandas计划（21）——获取指定日期所属月的月初月末.md)
 
 [拯救pandas计划（22）——再话extract和extractall](./拯救pandas计划（22）——再话extract和extractall.md)
+
+[拯救pandas计划（23）——groupby分组聚合](./拯救pandas计划（23）——groupby分组聚合.md)
