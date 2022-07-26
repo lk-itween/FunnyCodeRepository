@@ -29,7 +29,7 @@ df = pd.DataFrame({'标签': np.repeat(['A', 'B', 'C', 'D'], 5),
                             59, 48, 51, 56, 59, 46, 48, 54, 56, 51]})
 ```
 
-![](https://s2.loli.net/2022/07/19/so2zcNtaT3EBySL.png)  
+![](./img/pandas_save_23_1.png)  
 
 ## / 方法说明
 
@@ -64,7 +64,7 @@ df.groupby(
 df.groupby(['标签'])['数量'].mean()
 ```
 
-![](https://s2.loli.net/2022/07/19/o3wMq5S2rmEaz9D.png)  
+![](./img/pandas_save_23_2.png)  
 
 类似的，可以直接聚合两列。  
 
@@ -72,7 +72,7 @@ df.groupby(['标签'])['数量'].mean()
 df.groupby(['标签', '子类型'])['数量'].mean()
 ```
 
-![](https://s2.loli.net/2022/07/19/8GMFJwgLk9rU61d.png)  
+![](./img/pandas_save_23_3.png)  
 
 聚合条件增多了，生成的行数也多了，数字所表达的含义也会有所变化，在未筛选`数量列`之前，生成的是`DataFrameGroupBy`对象，筛选后为`SeriesGroupBy`，除了常见的统计方法外，还能进行分组去重，前几大的数，去重计数等。  
 
@@ -82,7 +82,7 @@ df.groupby(['标签'])['数量'].nunique()
 df.groupby(['标签'])['数量'].nlargest(2)
 ```
 
-![](https://s2.loli.net/2022/07/19/5IwmWFp3ozcLN6s.png)  
+![](./img/pandas_save_23_4.png)  
 
 当as_index=False，还是能够使用上述方法。  
 
@@ -94,7 +94,7 @@ df.groupby(['标签'])['数量'].nlargest(2)
 df_index = df.set_index(['标签', '子类型'])
 ```
 
-![](https://s2.loli.net/2022/07/19/MHdlAUgcynI6uZw.png)  
+![](./img/pandas_save_23_5.png)  
 
 使用的参数改为`level`，这里的索引具有名称，所以将名称传入level，通常是没有的，就设置位置值，比如0,1,2...   
 
@@ -109,7 +109,7 @@ df_index.groupby(level='标签').mean()
 df_index.groupby(level='标签').count()
 ```
 
-![](https://s2.loli.net/2022/07/19/p6MqraGgOV35wxc.png)  
+![](./img/pandas_save_23_6.png)  
 
 3. 聚合日期  
 
@@ -121,7 +121,7 @@ df_index.groupby(level='标签').count()
 df.groupby(pd.to_datetime(df['日期']).dt.month)['数量'].sum()
 ```
 
-![](https://s2.loli.net/2022/07/19/4ZoPL8Mfpg2U3NT.png)  
+![](./img/pandas_save_23_7.png)  
 
 如果需要统计每年每月的数量和，可能再转换成日期稍显麻烦，可以先观察数据格式是否一致，通过切片的方式进行聚合。  
 
@@ -129,7 +129,7 @@ df.groupby(pd.to_datetime(df['日期']).dt.month)['数量'].sum()
 df.groupby(df['日期'].str[:7])['数量'].sum()
 ```
 
-![](https://s2.loli.net/2022/07/19/lUseJAyjMaKRvdV.png)  
+![](./img/pandas_save_23_8.png)  
 
 4. 结合其他方法  
 
@@ -141,7 +141,7 @@ df.groupby(df['日期'].str[:7])['数量'].sum()
 df.groupby(['标签', '子类型'])['数量'].mean().unstack('子类型')
 ```
 
-![](https://s2.loli.net/2022/07/19/ukmOFszcXY9HbD3.png)  
+![](./img/pandas_save_23_9.png)  
 
 5. 遍历分组  
 
